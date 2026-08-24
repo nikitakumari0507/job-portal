@@ -1,0 +1,582 @@
+{% extends "employer/employer_dash_base.html" %}
+
+{% block title %}
+Post New Job
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Heading -->
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+
+        <div>
+            <p class="text-primary fw-semibold text-uppercase small mb-1">
+                Job Management
+            </p>
+
+            <h2 class="fw-bold text-dark mb-2">
+                Post a New Job
+            </h2>
+
+            <p class="text-muted mb-0">
+                Add complete job information to find suitable candidates.
+            </p>
+        </div>
+
+        <a href="{% url 'my_jobs' %}"
+           class="btn btn-outline-primary">
+
+            <i class="bi bi-arrow-left me-2"></i>
+            Back to My Jobs
+
+        </a>
+
+    </div>
+
+
+    <!-- Post Job Form -->
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="card border-0 shadow-sm">
+
+        {% csrf_token %}
+
+        <div class="card-body p-4 p-lg-5">
+
+            <!-- Basic Information -->
+
+            <div class="mb-5">
+
+                <div class="mb-4">
+                    <h4 class="fw-bold mb-1">
+                        Basic Information
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Enter the main details of the vacancy.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <label for="company_name" class="form-label fw-semibold">
+                            Company Name <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="company_name" id="company_name"
+                               class="form-control" placeholder="Example: Aurora Tech" required>
+                    </div>
+
+                    <!-- Job Title -->
+
+                    <div class="col-md-6">
+
+                        <label for="title"
+                               class="form-label fw-semibold">
+
+                            Job Title
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <input type="text"
+                               name="title"
+                               id="title"
+                               class="form-control"
+                               placeholder="Example: Senior Python Developer"
+                               required>
+
+                    </div>
+
+
+                    <!-- Category -->
+
+                    <div class="col-md-6">
+
+                        <label for="category"
+                               class="form-label fw-semibold">
+
+                            Job Category
+
+                        </label>
+
+                        <input type="text"
+                               name="category"
+                               id="category"
+                               class="form-control"
+                               placeholder="Example: Software Development">
+
+                    </div>
+
+
+                    <!-- Job Type -->
+
+                    <div class="col-md-6">
+
+                        <label for="job_type"
+                               class="form-label fw-semibold">
+
+                            Job Type
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <select name="job_type"
+                                id="job_type"
+                                class="form-select"
+                                required>
+
+                            <option value="">
+                                Select job type
+                            </option>
+
+                            <option value="full_time">
+                                Full Time
+                            </option>
+
+                            <option value="part_time">
+                                Part Time
+                            </option>
+
+                            <option value="internship">
+                                Internship
+                            </option>
+
+                            <option value="contract">
+                                Contract
+                            </option>
+
+                            <option value="remote">
+                                Remote
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Work Mode -->
+
+                    <div class="col-md-6">
+
+                        <label for="work_mode"
+                               class="form-label fw-semibold">
+
+                            Work Mode
+
+                        </label>
+
+                        <select name="work_mode"
+                                id="work_mode"
+                                class="form-select">
+
+                            <option value="">
+                                Select work mode
+                            </option>
+
+                            <option value="On-site">
+                                On-site
+                            </option>
+
+                            <option value="Remote">
+                                Remote
+                            </option>
+
+                            <option value="Hybrid">
+                                Hybrid
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="col-md-6">
+
+                        <label for="location"
+                               class="form-label fw-semibold">
+
+                            Location
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <input type="text"
+                               name="location"
+                               id="location"
+                               class="form-control"
+                               placeholder="Example: Bangalore, Karnataka"
+                               required>
+
+                    </div>
+
+
+                    <!-- Experience -->
+
+                    <div class="col-md-6">
+
+                        <label for="experience"
+                               class="form-label fw-semibold">
+
+                            Required Experience
+
+                        </label>
+
+                        <input type="text"
+                               name="experience"
+                               id="experience"
+                               class="form-control"
+                               placeholder="Example: 2–4 years">
+
+                    </div>
+
+
+                    <!-- Education -->
+
+                    <div class="col-md-6">
+
+                        <label for="education"
+                               class="form-label fw-semibold">
+
+                            Education Level
+
+                        </label>
+
+                        <input type="text"
+                               name="education"
+                               id="education"
+                               class="form-control"
+                               placeholder="Example: Bachelor's Degree">
+
+                    </div>
+
+
+                    <!-- Vacancies -->
+
+                    <div class="col-md-6">
+
+                        <label for="vacancies"
+                               class="form-label fw-semibold">
+
+                            Number of Vacancies
+
+                        </label>
+
+                        <input type="number"
+                               name="vacancies"
+                               id="vacancies"
+                               class="form-control"
+                               value="1"
+                               min="1">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="my-5">
+
+
+            <!-- Salary and Deadline -->
+
+            <div class="mb-5">
+
+                <div class="mb-4">
+
+                    <h4 class="fw-bold mb-1">
+                        Salary and Deadline
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Add salary range and application deadline.
+                    </p>
+
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- Minimum Salary -->
+
+                    <div class="col-md-4">
+
+                        <label for="minimum_salary"
+                               class="form-label fw-semibold">
+
+                            Minimum Salary
+
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input type="number"
+                                   name="minimum_salary"
+                                   id="minimum_salary"
+                                   class="form-control"
+                                   placeholder="30000"
+                                   min="0">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Maximum Salary -->
+
+                    <div class="col-md-4">
+
+                        <label for="maximum_salary"
+                               class="form-label fw-semibold">
+
+                            Maximum Salary
+
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input type="number"
+                                   name="maximum_salary"
+                                   id="maximum_salary"
+                                   class="form-control"
+                                   placeholder="60000"
+                                   min="0">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Deadline -->
+
+                    <div class="col-md-4">
+
+                        <label for="application_deadline"
+                               class="form-label fw-semibold">
+
+                            Application Deadline
+
+                        </label>
+
+                        <input type="date"
+                               name="application_deadline"
+                               id="application_deadline"
+                               class="form-control">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="my-5">
+
+
+            <!-- Job Description -->
+
+            <div class="mb-5">
+
+                <div class="mb-4">
+
+                    <h4 class="fw-bold mb-1">
+                        Job Details
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Explain the role, responsibilities and requirements.
+                    </p>
+
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- Description -->
+
+                    <div class="col-12">
+
+                        <label for="description"
+                               class="form-label fw-semibold">
+
+                            Job Description
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <textarea name="description"
+                                  id="description"
+                                  class="form-control"
+                                  rows="6"
+                                  placeholder="Describe the job role, responsibilities and daily work..."
+                                  required></textarea>
+
+                    </div>
+
+
+                    <!-- Requirements -->
+
+                    <div class="col-12">
+
+                        <label for="requirements"
+                               class="form-label fw-semibold">
+
+                            Job Requirements
+                            <span class="text-danger">*</span>
+
+                        </label>
+
+                        <textarea name="requirements"
+                                  id="requirements"
+                                  class="form-control"
+                                  rows="5"
+                                  placeholder="Enter qualifications, experience and other requirements..."
+                                  required></textarea>
+
+                    </div>
+
+
+                    <!-- Skills -->
+
+                    <div class="col-12">
+
+                        <label for="skills"
+                               class="form-label fw-semibold">
+
+                            Required Skills
+
+                        </label>
+
+                        <input type="text"
+                               name="skills"
+                               id="skills"
+                               class="form-control"
+                               placeholder="Example: Python, Django, HTML, CSS, JavaScript">
+
+                        <div class="form-text">
+                            Separate multiple skills using commas.
+                        </div>
+
+                    </div>
+
+
+                    <!-- Benefits -->
+
+                    <div class="col-12">
+
+                        <label for="benefits"
+                               class="form-label fw-semibold">
+
+                            Employee Benefits
+
+                        </label>
+
+                        <textarea name="benefits"
+                                  id="benefits"
+                                  class="form-control"
+                                  rows="3"
+                                  placeholder="Example: Health insurance, flexible hours, paid leave"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="my-5">
+
+
+            <!-- Company Logo -->
+
+            <div class="mb-4">
+
+                <div class="mb-4">
+
+                    <h4 class="fw-bold mb-1">
+                        Company Logo
+                    </h4>
+
+                    <p class="text-muted mb-0">
+                        Upload a logo that will appear with the job listing.
+                    </p>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-7">
+
+                        <label for="company_logo"
+                               class="form-label fw-semibold">
+
+                            Upload Logo
+
+                        </label>
+
+                        <input type="file"
+                               name="company_logo"
+                               id="company_logo"
+                               class="form-control"
+                               accept="image/png,image/jpeg,image/jpg,image/webp">
+
+                        <div class="form-text">
+                            Recommended format: PNG, JPG or WEBP.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="d-flex flex-wrap justify-content-end gap-3 pt-4">
+
+                <a href="{% url 'my_jobs' %}"
+                   class="btn btn-light border px-4">
+
+                    Cancel
+
+                </a>
+
+                <button type="reset"
+                        class="btn btn-outline-secondary px-4">
+
+                    <i class="bi bi-arrow-counterclockwise me-2"></i>
+                    Reset
+
+                </button>
+
+                <button type="submit"
+                        class="btn btn-primary px-4">
+
+                    <i class="bi bi-send-fill me-2"></i>
+                    Publish Job
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

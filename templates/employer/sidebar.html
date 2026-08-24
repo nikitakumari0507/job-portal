@@ -1,0 +1,171 @@
+{% load static %}
+
+<aside class="employer-sidebar" id="employerSidebar">
+
+    <!-- Logo -->
+
+    <div class="employer-sidebar-logo">
+
+        <a href="{% url 'employer_dashboard' %}">
+            <i class="bi bi-briefcase-fill"></i>
+            <span>JobPortal</span>
+        </a>
+
+        <button
+            type="button"
+            class="sidebar-close-btn"
+            id="sidebarCloseBtn"
+            aria-label="Close sidebar">
+
+            <i class="bi bi-x-lg"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- Employer Profile -->
+
+    <div class="employer-profile-mini">
+
+        {% if request.user.profile_image %}
+
+            <img
+                src="{{ request.user.profile_image.url }}"
+                alt="{{ request.user.username }}"
+                class="employer-profile-image">
+
+        {% else %}
+
+            <div class="employer-avatar">
+
+                {% if request.user.first_name %}
+
+                    {{ request.user.first_name|slice:":1"|upper }}
+
+                    {% if request.user.last_name %}
+                        {{ request.user.last_name|slice:":1"|upper }}
+                    {% endif %}
+
+                {% else %}
+
+                    {{ request.user.username|slice:":2"|upper }}
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+        <div class="employer-profile-details">
+
+            <h4>
+
+                {% if request.user.get_full_name %}
+
+                    {{ request.user.get_full_name }}
+
+                {% else %}
+
+                    {{ request.user.username }}
+
+                {% endif %}
+
+            </h4>
+
+            <p>Employer Account</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Navigation -->
+
+    <nav class="employer-menu">
+
+        <!-- Dashboard -->
+
+        <a
+            href="{% url 'employer_dashboard' %}"
+            class="{% if request.resolver_match.url_name == 'employer_dashboard' %}active{% endif %}">
+
+            <i class="bi bi-grid-fill"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- My Jobs -->
+
+       <a
+    href="{% url 'my_jobs' %}"
+    class="{% if request.resolver_match.url_name == 'my_jobs' or request.resolver_match.url_name == 'edit_job' %}active{% endif %}"
+>
+    <i class="bi bi-briefcase-fill"></i>
+    <span>My Jobs</span>
+</a>
+
+        <!-- Post Job -->
+
+        <a
+            href="{% url 'post_job' %}"
+            class="{% if request.resolver_match.url_name == 'post_job' %}active{% endif %}">
+
+            <i class="bi bi-plus-circle-fill"></i>
+
+            <span>Post New Job</span>
+
+        </a>
+
+
+        <!-- Applications -->
+
+        <a
+            href="{% url 'employer_applications' %}"
+            class="{% if request.resolver_match.url_name == 'employer_applications' %}active{% endif %}">
+
+            <i class="bi bi-file-earmark-person-fill"></i>
+
+            <span>Applications</span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- Bottom Links -->
+
+    <div class="employer-sidebar-bottom">
+
+        <a href="{% url 'home' %}">
+
+            <i class="bi bi-house-door-fill"></i>
+
+            <span>Back to Website</span>
+
+        </a>
+
+
+        <a
+            href="{% url 'logout' %}"
+            class="logout-link">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- Mobile Overlay -->
+
+<div
+    class="employer-sidebar-overlay"
+    id="employerSidebarOverlay">
+</div>

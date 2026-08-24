@@ -1,0 +1,14 @@
+JOB PORTAL - QUICK START (WINDOWS POWERSHELL)
+
+1. Open this folder in VS Code. This is the folder containing manage.py.
+2. Open a new PowerShell terminal and run:
+
+   py -m venv venv
+   .\venv\Scripts\Activate.ps1
+   py -m pip install -r requirements.txt
+   py manage.py migrate
+   py manage.py runserver
+
+3. Open http://127.0.0.1:8000/ in your browser.
+
+Important: A fresh virtual environment is intentionally not included in the ZIP.

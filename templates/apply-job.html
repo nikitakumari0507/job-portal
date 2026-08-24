@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Apply for {{ job.title }} | JobPortal{% endblock %}
+{% block content %}
+<main class="application-page"><div class="container">
+  <a class="application-back" href="{% url 'job_detail' job.id %}"><i class="bi bi-arrow-left"></i> Back to job details</a>
+  <div class="application-layout">
+    <aside class="application-summary"><span class="application-step">JOB APPLICATION</span><h1>{{ job.title|title }}</h1><p class="application-company">{{ job.company_name|default:job.employer.first_name|default:job.employer.username }}</p>
+      <div><i class="bi bi-geo-alt"></i><span>Location<strong>{{ job.location }}</strong></span></div><div><i class="bi bi-briefcase"></i><span>Job type<strong>{{ job.get_job_type_display }}</strong></span></div><div><i class="bi bi-clock"></i><span>Experience<strong>{{ job.experience|default:"Not specified" }}</strong></span></div>
+      <div class="application-tip"><i class="bi bi-lightbulb"></i><p><strong>Quick tip</strong>Upload an updated resume that highlights skills relevant to this role.</p></div>
+    </aside>
+    <section class="application-form-card"><div class="form-heading"><span>1</span><div><h2>Your details</h2><p>Fields marked with * are required.</p></div></div>
+      {% if messages %}{% for message in messages %}<div class="alert alert-{{ message.tags|default:'danger' }}">{{ message }}</div>{% endfor %}{% endif %}
+      <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="application-field"><label for="full_name">Full name *</label><div><i class="bi bi-person"></i><input id="full_name" name="full_name" type="text" value="{{ form_data.full_name|default:request.user.first_name }}" placeholder="Enter your full name" required></div></div>
+        <div class="application-fields-row"><div class="application-field"><label for="email">Email address *</label><div><i class="bi bi-envelope"></i><input id="email" name="email" type="email" value="{{ form_data.email|default:request.user.email }}" placeholder="name@example.com" required></div></div><div class="application-field"><label for="phone">Phone number *</label><div><i class="bi bi-telephone"></i><input id="phone" name="phone" type="tel" value="{{ form_data.phone|default:request.user.phone }}" placeholder="10-digit mobile number" pattern="[0-9+ -]{10,20}" required></div></div></div>
+        <div class="resume-upload"><label for="resume"><i class="bi bi-cloud-arrow-up"></i><strong>Upload your resume *</strong><span>PDF, DOC or DOCX</span></label><input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" required></div>
+        <label class="application-consent"><input type="checkbox" required><span>I confirm that the information provided is correct and may be shared with this employer.</span></label>
+        <button class="submit-application-button" type="submit">Submit Application <i class="bi bi-arrow-right"></i></button><p class="application-security"><i class="bi bi-lock"></i> Your information is securely submitted to the employer.</p>
+      </form>
+    </section>
+  </div>
+</div></main>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "employer/employer_dash_base.html" %}
+
+{% block title %}
+Search Candidates
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold">Candidates</h2>
+            <p class="text-muted">Browse all registered candidates.</p>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        {% for candidate in candidates %}
+
+        <div class="col-md-6 col-lg-4 mb-4">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body text-center">
+
+                    {% if candidate.profile_image %}
+
+                        <img src="{{ candidate.profile_image.url }}"
+                             class="rounded-circle mb-3"
+                             width="90"
+                             height="90"
+                             style="object-fit:cover;">
+
+                    {% else %}
+
+                        <i class="bi bi-person-circle display-1 text-primary"></i>
+
+                    {% endif %}
+
+                    <h5>{{ candidate.get_full_name|default:candidate.username }}</h5>
+
+                    <p class="text-muted mb-1">
+                        {{ candidate.email }}
+                    </p>
+
+                    <p class="text-muted">
+                        {{ candidate.phone }}
+                    </p>
+
+                    {% if candidate.resume %}
+
+                        <a href="{{ candidate.resume.url }}"
+                           target="_blank"
+                           class="btn btn-outline-primary btn-sm">
+
+                            <i class="bi bi-file-earmark-text"></i>
+                            View Resume
+
+                        </a>
+
+                    {% else %}
+
+                        <span class="badge bg-secondary">
+                            No Resume
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="alert alert-info text-center">
+
+                No candidates found.
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

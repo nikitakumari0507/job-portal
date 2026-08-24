@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Register As
+{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth-choice.css' %}">
+{% endblock %}
+
+{% block navbar_extra_class %}
+auth-choice-navbar-fix
+{% endblock %}
+
+{% block content %}
+
+<section class="register-choice-page">
+
+    <div class="register-choice-content">
+
+        <h2>Register As</h2>
+
+        <p class="register-subtitle">
+            Choose your account type to create your account
+        </p>
+
+        <div class="register-choice-cards">
+
+            <!-- Candidate -->
+
+            <div class="register-choice-card">
+
+                <div class="register-choice-icon">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+
+                <h4>Candidate</h4>
+
+                <p>
+                    Create your account to search and apply for jobs with thousands of companies.
+                </p>
+
+                <a href="{% url 'register' %}"
+                   class="candidate-register-btn">
+
+                    Candidate Register
+
+                </a>
+
+            </div>
+
+
+            <!-- Employer -->
+
+            <div class="register-choice-card">
+
+                <div class="register-choice-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <h4>Employer</h4>
+
+                <p>
+                    Create your employer account to post jobs and manage applicants easily.
+                </p>
+
+                <a href="{% url 'register' %}"
+                   class="employer-register-btn">
+
+                    Employer Register
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

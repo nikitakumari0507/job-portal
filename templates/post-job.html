@@ -1,0 +1,2024 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Post New Job | JobPortal</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="post-job-dashboard">
+
+    <!-- SIDEBAR -->
+
+    <aside
+        class="post-job-sidebar"
+        id="postJobSidebar"
+    >
+
+        <div class="post-job-sidebar-logo">
+
+            <a href="index.html">
+                JobPortal
+            </a>
+
+            <button
+                type="button"
+                class="post-job-sidebar-close"
+                id="postJobSidebarClose"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+        </div>
+
+        <div class="post-job-employer-mini">
+
+            <div class="post-job-avatar">
+                TS
+            </div>
+
+            <div>
+
+                <h4>Tech Solutions</h4>
+
+                <p>Employer Account</p>
+
+            </div>
+
+        </div>
+
+        <nav class="post-job-menu">
+
+            <a href="employer-dashboard.html">
+
+                <i class="bi bi-grid-fill"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-briefcase-fill"></i>
+
+                <span>My Jobs</span>
+
+            </a>
+
+            <a
+                href="post-job.html"
+                class="active"
+            >
+
+                <i class="bi bi-plus-circle-fill"></i>
+
+                <span>Post New Job</span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-file-earmark-text-fill"></i>
+
+                <span>Applications</span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-people-fill"></i>
+
+                <span>Candidates</span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-bell-fill"></i>
+
+                <span>Notifications</span>
+
+            </a>
+
+            <a href="#">
+
+                <i class="bi bi-gear-fill"></i>
+
+                <span>Settings</span>
+
+            </a>
+
+        </nav>
+
+        <div class="post-job-sidebar-bottom">
+
+            <a href="index.html">
+
+                <i class="bi bi-house-door-fill"></i>
+
+                <span>Back to Website</span>
+
+            </a>
+
+            <a
+                href="login.html"
+                class="post-job-logout"
+            >
+
+                <i class="bi bi-box-arrow-right"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="post-job-main">
+
+        <!-- TOPBAR -->
+
+        <header class="post-job-topbar">
+
+            <div class="post-job-topbar-left">
+
+                <button
+                    type="button"
+                    class="post-job-menu-btn"
+                    id="postJobMenuBtn"
+                >
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div>
+
+                    <h2>Post New Job</h2>
+
+                    <p>
+                        Create and publish a new job opportunity.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="post-job-topbar-right">
+
+                <button
+                    type="button"
+                    class="post-job-topbar-icon"
+                >
+                    <i class="bi bi-search"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="post-job-topbar-icon post-job-notification"
+                >
+                    <i class="bi bi-bell"></i>
+
+                    <span>3</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="theme-toggle-btn"
+                    id="themeToggle"
+                    aria-label="Toggle theme"
+                >
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+
+                <div class="post-job-topbar-profile">
+
+                    <div class="post-job-topbar-avatar">
+                        TS
+                    </div>
+
+                    <div>
+
+                        <h4>Tech Solutions</h4>
+
+                        <p>Employer</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <section class="post-job-content">
+
+            <!-- PAGE HEADER -->
+
+            <div class="post-job-page-header">
+
+                <div>
+
+                    <span>Job Creation</span>
+
+                    <h1>Create a New Job Opening</h1>
+
+                    <p>
+                        Add job information, requirements and company details,
+                        then publish it for candidates.
+                    </p>
+
+                </div>
+
+                <a
+                    href="employer-dashboard.html"
+                    class="post-job-back-btn"
+                >
+                    <i class="bi bi-arrow-left"></i>
+
+                    Back to Dashboard
+                </a>
+
+            </div>
+
+
+            <!-- MAIN GRID -->
+
+            <div class="post-job-layout">
+
+                <!-- FORM SIDE -->
+
+                <div class="post-job-form-column">
+                  <form
+                 class="post-job-form"
+                    id="postJobForm"
+                method="POST"
+                 enctype="multipart/form-data"
+                  >
+                  {% csrf_token %}
+
+                        <!-- FORM HEADER -->
+
+                        <div class="post-job-form-heading">
+
+                            <div class="post-job-form-icon">
+
+                                <i class="bi bi-briefcase-fill"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2>Job Information</h2>
+
+                                <p>
+                                    Fill in the details of the new position.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BASIC INFORMATION PLACEHOLDER -->
+
+                        <div class="post-job-form-section">
+
+                            <div class="post-job-section-heading">
+
+                                <span>01</span>
+
+                                <div>
+
+                                    <h3>Basic Information</h3>
+
+                                    <p>
+                                        Add the job title, category and employment type.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="post-job-fields-grid">
+
+    <div class="post-job-field full-width">
+
+        <label for="jobTitle">
+            Job Title
+            <span>*</span>
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-briefcase"></i>
+
+            <input
+                type="text"
+                id="jobTitle"
+                 name="title"
+                placeholder="Example: Frontend Developer"
+                required
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="jobCategory">
+            Job Category
+            <span>*</span>
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-grid"></i>
+
+            <select
+                id="jobCategory"
+               name="category"
+                required
+            >
+
+                <option value="">
+                    Select category
+                </option>
+
+                <option value="Software Development">
+                    Software Development
+                </option>
+
+                <option value="Design">
+                    Design
+                </option>
+
+                <option value="Marketing">
+                    Marketing
+                </option>
+
+                <option value="Finance">
+                    Finance
+                </option>
+
+                <option value="Human Resources">
+                    Human Resources
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="jobType">
+            Employment Type
+            <span>*</span>
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-clock"></i>
+
+            <select
+                id="jobType"
+               name="job_type"
+                required
+            >
+
+                <option value="Full Time">
+                    Full Time
+                </option>
+
+                <option value="Part Time">
+                    Part Time
+                </option>
+
+                <option value="Internship">
+                    Internship
+                </option>
+
+                <option value="Contract">
+                    Contract
+                </option>
+
+                <option value="Remote">
+                    Remote
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="jobLocation">
+            Location
+            <span>*</span>
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-geo-alt"></i>
+
+            <input
+                type="text"
+                id="jobLocation"
+                name="location"
+                placeholder="Example: Bangalore"
+                required
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="jobExperience">
+            Experience
+            <span>*</span>
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-person-workspace"></i>
+
+            <select
+                id="jobExperience"
+                name="experience"
+                required
+            >
+
+                <option value="">
+                    Select experience
+                </option>
+
+                <option value="Fresher">
+                    Fresher
+                </option>
+
+                <option value="0–2 Years">
+                    0–2 Years
+                </option>
+
+                <option value="2–5 Years">
+                    2–5 Years
+                </option>
+
+                <option value="5–8 Years">
+                    5–8 Years
+                </option>
+
+                <option value="8+ Years">
+                    8+ Years
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="minimumSalary">
+            Minimum Salary
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-currency-rupee"></i>
+
+            <input
+                type="number"
+                id="minimumSalary"
+                name="minimum_salary"
+                placeholder="Example: 400000"
+                min="0"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="maximumSalary">
+            Maximum Salary
+        </label>
+
+        <div class="post-job-input-box">
+
+            <i class="bi bi-currency-rupee"></i>
+
+            <input
+                type="number"
+                id="maximumSalary"
+               name="maximum_salary"
+                placeholder="Example: 800000"
+                min="0"
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION PLACEHOLDER -->
+
+                        <div class="post-job-form-section">
+
+                            <div class="post-job-section-heading">
+
+                                <span>02</span>
+
+                                <div>
+
+                                    <h3>Description & Requirements</h3>
+
+                                    <p>
+                                        Explain responsibilities and required skills.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                           <div class="post-job-description-fields">
+
+    <div class="post-job-field">
+
+        <div class="post-job-label-row">
+
+            <label for="jobDescription">
+                Job Description
+                <span>*</span>
+            </label>
+
+            <small id="descriptionCount">
+                0 / 1000
+            </small>
+
+        </div>
+
+        <textarea
+            id="jobDescription"
+            name="description"
+            rows="7"
+            maxlength="1000"
+            placeholder="Write a clear description of the role, responsibilities and expectations."
+            required
+        ></textarea>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="jobRequirements">
+            Requirements
+            <span>*</span>
+        </label>
+
+        <textarea
+            id="jobRequirements"
+           name="requirements"
+            rows="6"
+            placeholder="Add education, experience and technical requirements."
+            required
+        ></textarea>
+
+    </div>
+
+
+    <div class="post-job-field">
+
+        <label for="jobSkillsInput">
+            Required Skills
+        </label>
+
+        <div class="post-job-skill-input-row">
+
+            <div class="post-job-input-box">
+
+                <i class="bi bi-stars"></i>
+
+                <input
+                    type="text"
+                    id="jobSkillsInput"
+                    placeholder="Example: HTML"
+                >
+
+            </div>
+
+    <button
+    type="button"
+    id="addJobSkillBtn"
+    class="add-job-skill-btn"
+>
+    <i class="bi bi-plus-lg"></i>
+    Add
+</button>
+        </div>
+
+        <div
+            class="post-job-skills-list"
+            id="postJobSkillsList"
+        ></div>
+
+        <input
+            type="hidden"
+            id="jobSkills"
+           name="skills"
+        >
+
+    </div>
+
+</div>
+
+                        </div>
+                        <!-- ADDITIONAL JOB DETAILS -->
+
+<div class="post-job-form-section">
+
+    <div class="post-job-section-heading">
+
+        <span>03</span>
+
+        <div>
+
+            <h3>Additional Details</h3>
+
+            <p>
+                Add deadline, vacancies, work mode and company benefits.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="post-job-fields-grid">
+
+        <div class="post-job-field">
+
+            <label for="applicationDeadline">
+                Application Deadline
+                <span>*</span>
+            </label>
+
+            <div class="post-job-input-box">
+
+                <i class="bi bi-calendar-event"></i>
+
+                <input
+                    type="date"
+                    id="applicationDeadline"
+                   name="application_deadline"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="post-job-field">
+
+            <label for="numberOfVacancies">
+                Number of Vacancies
+                <span>*</span>
+            </label>
+
+            <div class="post-job-input-box">
+
+                <i class="bi bi-people"></i>
+
+                <input
+                    type="number"
+                    id="numberOfVacancies"
+                   name="vacancies"
+                    min="1"
+                    placeholder="Example: 5"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="post-job-field">
+
+            <label for="workMode">
+                Work Mode
+            </label>
+
+            <div class="post-job-input-box">
+
+                <i class="bi bi-laptop"></i>
+
+                <select
+                    id="workMode"
+                  name="work_mode"
+                >
+
+                    <option value="On Site">
+                        On Site
+                    </option>
+
+                    <option value="Remote">
+                        Remote
+                    </option>
+
+                    <option value="Hybrid">
+                        Hybrid
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="post-job-field">
+
+            <label for="educationLevel">
+                Education Level
+            </label>
+
+            <div class="post-job-input-box">
+
+                <i class="bi bi-mortarboard"></i>
+
+                <select
+                    id="educationLevel"
+                    name="education"
+                >
+
+                    <option value="Any Graduate">
+                        Any Graduate
+                    </option>
+
+                    <option value="B.Tech / B.E.">
+                        B.Tech / B.E.
+                    </option>
+
+                    <option value="BCA / MCA">
+                        BCA / MCA
+                    </option>
+
+                    <option value="MBA">
+                        MBA
+                    </option>
+
+                    <option value="12th Pass">
+                        12th Pass
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="post-job-field full-width">
+
+            <div class="post-job-field full-width">
+
+    <label for="companyLogoInput">
+        Company Logo
+    </label>
+
+    <div class="company-logo-upload-box">
+
+        <div class="company-logo-preview" id="companyLogoPreview">
+            TS
+        </div>
+
+        <div>
+
+            <h4>Upload Company Logo</h4>
+
+            <p>
+                PNG, JPG or JPEG. Maximum size 2 MB.
+            </p>
+
+            <label
+    for="companyLogoInput"
+    id="companyLogoUploadBtn"
+    class="company-logo-upload-btn">
+
+    <i class="bi bi-cloud-arrow-up"></i>
+    Choose Logo
+
+</label>
+
+<input
+    type="file"
+    id="companyLogoInput"
+    name="company_logo"
+    accept=".png,.jpg,.jpeg"
+    hidden
+>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <label>
+                Company Benefits
+            </label>
+            
+
+            <div class="post-job-benefits-grid">
+
+                <label class="post-job-benefit-option">
+
+                    <input
+                        type="checkbox"
+                        name="benefits"
+                        value="Health Insurance"
+                    >
+
+                    <span>
+                        <i class="bi bi-heart-pulse"></i>
+                        Health Insurance
+                    </span>
+
+                </label>
+
+
+                <label class="post-job-benefit-option">
+
+                    <input
+                        type="checkbox"
+                        name="benefits"
+                        value="Flexible Hours"
+                    >
+
+                    <span>
+                        <i class="bi bi-clock-history"></i>
+                        Flexible Hours
+                    </span>
+
+                </label>
+
+
+                <label class="post-job-benefit-option">
+
+                    <input
+                        type="checkbox"
+                        name="benefits"
+                        value="Work From Home"
+                    >
+
+                    <span>
+                        <i class="bi bi-house-door"></i>
+                        Work From Home
+                    </span>
+
+                </label>
+
+
+                <label class="post-job-benefit-option">
+
+                    <input
+                        type="checkbox"
+                        name="benefits"
+                        value="Performance Bonus"
+                    >
+
+                    <span>
+                        <i class="bi bi-award"></i>
+                        Performance Bonus
+                    </span>
+
+                </label>
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="post-job-form-actions">
+
+                            <button
+                                type="button"
+                                class="save-job-draft-btn"
+                            >
+                                <i class="bi bi-file-earmark-text"></i>
+
+                                Save Draft
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="publish-job-btn"
+                            >
+                                <i class="bi bi-send-fill"></i>
+
+                                Publish Job
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- PREVIEW SIDE -->
+
+                <aside class="post-job-preview-column">
+
+                    <div class="post-job-preview-sticky">
+
+                        <div class="post-job-preview-heading">
+
+                            <div>
+
+                                <h2>Live Preview</h2>
+
+                                <p>
+                                    Candidates will see the job like this.
+                                </p>
+
+                            </div>
+
+                            <span>
+                                Preview
+                            </span>
+
+                        </div>
+
+                        <div class="post-job-preview-card">
+
+                            <div class="post-job-preview-top">
+
+                                <div class="post-job-preview-logo">
+                                    TS
+                                </div>
+
+                                <span class="post-job-preview-type">
+                                    Full Time
+                                </span>
+
+                            </div>
+
+                            <h3 id="previewJobTitle">
+                                Job Title
+                            </h3>
+
+                            <p class="post-job-preview-company">
+                                Tech Solutions Pvt. Ltd.
+                            </p>
+
+                            <div class="post-job-preview-meta">
+
+                                <span>
+                                    <i class="bi bi-geo-alt-fill"></i>
+
+                                    Location
+                                </span>
+
+                                <span>
+                                    <i class="bi bi-briefcase-fill"></i>
+
+                                    Experience
+                                </span>
+
+                                <span>
+                                    <i class="bi bi-currency-rupee"></i>
+
+                                    Salary
+                                </span>
+
+                            </div>
+
+                            <p class="post-job-preview-description">
+
+                                Your job description will appear here.
+
+                            </p>
+
+                            <div class="post-job-preview-skills">
+
+                                <span>Skill</span>
+
+                                <span>Skill</span>
+
+                                <span>Skill</span>
+
+                            </div>
+
+                            <button type="button">
+                                Apply Now
+                            </button>
+
+                        </div>
+
+                        <div class="post-job-tip-card">
+
+                            <i class="bi bi-lightbulb-fill"></i>
+
+                            <div>
+
+                                <h4>Quick Tip</h4>
+
+                                <p>
+                                    Clear job descriptions receive more
+                                    relevant applications.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebar =
+        document.getElementById("postJobSidebar");
+
+    const menuButton =
+        document.getElementById("postJobMenuBtn");
+
+    const closeButton =
+        document.getElementById("postJobSidebarClose");
+
+    if (menuButton && sidebar) {
+
+        menuButton.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.add(
+                    "post-job-sidebar-open"
+                );
+
+            }
+        );
+
+    }
+
+    if (closeButton && sidebar) {
+
+        closeButton.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.remove(
+                    "post-job-sidebar-open"
+                );
+
+            }
+        );
+
+    }
+    /* =================================
+   POST JOB LIVE PREVIEW
+================================= */
+
+const jobTitleInput =
+    document.getElementById("jobTitle");
+
+const jobTypeInput =
+    document.getElementById("jobType");
+
+const jobLocationInput =
+    document.getElementById("jobLocation");
+
+const jobExperienceInput =
+    document.getElementById("jobExperience");
+
+const minimumSalaryInput =
+    document.getElementById("minimumSalary");
+
+const maximumSalaryInput =
+    document.getElementById("maximumSalary");
+
+const jobDescriptionInput =
+    document.getElementById("jobDescription");
+
+const descriptionCount =
+    document.getElementById("descriptionCount");
+
+const previewJobTitle =
+    document.getElementById("previewJobTitle");
+
+const previewJobType =
+    document.querySelector(".post-job-preview-type");
+
+const previewMetaItems =
+    document.querySelectorAll(
+        ".post-job-preview-meta span"
+    );
+
+const previewDescription =
+    document.querySelector(
+        ".post-job-preview-description"
+    );
+
+
+function updateJobPreview() {
+
+    if (previewJobTitle && jobTitleInput) {
+
+        previewJobTitle.textContent =
+            jobTitleInput.value.trim() || "Job Title";
+
+    }
+
+    if (previewJobType && jobTypeInput) {
+
+        previewJobType.textContent =
+            jobTypeInput.value || "Full Time";
+
+    }
+
+    if (
+        previewMetaItems.length >= 3
+    ) {
+
+        previewMetaItems[0].innerHTML = `
+            <i class="bi bi-geo-alt-fill"></i>
+            ${
+                jobLocationInput.value.trim()
+                || "Location"
+            }
+        `;
+
+        previewMetaItems[1].innerHTML = `
+            <i class="bi bi-briefcase-fill"></i>
+            ${
+                jobExperienceInput.value
+                || "Experience"
+            }
+        `;
+
+        const minimumSalary =
+            minimumSalaryInput.value;
+
+        const maximumSalary =
+            maximumSalaryInput.value;
+
+        let salaryText = "Salary";
+
+        if (
+            minimumSalary &&
+            maximumSalary
+        ) {
+
+            salaryText =
+                `₹${Number(minimumSalary).toLocaleString("en-IN")} - ₹${Number(maximumSalary).toLocaleString("en-IN")}`;
+
+        } else if (minimumSalary) {
+
+            salaryText =
+                `From ₹${Number(minimumSalary).toLocaleString("en-IN")}`;
+
+        } else if (maximumSalary) {
+
+            salaryText =
+                `Up to ₹${Number(maximumSalary).toLocaleString("en-IN")}`;
+
+        }
+
+        previewMetaItems[2].innerHTML = `
+            <i class="bi bi-currency-rupee"></i>
+            ${salaryText}
+        `;
+
+    }
+
+    if (
+        previewDescription &&
+        jobDescriptionInput
+    ) {
+
+        previewDescription.textContent =
+            jobDescriptionInput.value.trim()
+            || "Your job description will appear here.";
+
+    }
+
+}
+
+
+const previewFields = [
+    jobTitleInput,
+    jobTypeInput,
+    jobLocationInput,
+    jobExperienceInput,
+    minimumSalaryInput,
+    maximumSalaryInput,
+    jobDescriptionInput
+];
+
+previewFields.forEach(function (field) {
+
+    if (!field) return;
+
+    field.addEventListener(
+        "input",
+        updateJobPreview
+    );
+
+    field.addEventListener(
+        "change",
+        updateJobPreview
+    );
+
+});
+
+
+/* DESCRIPTION COUNTER */
+
+if (
+    jobDescriptionInput &&
+    descriptionCount
+) {
+
+    jobDescriptionInput.addEventListener(
+        "input",
+        function () {
+
+            descriptionCount.textContent =
+                `${this.value.length} / 1000`;
+
+        }
+    );
+
+}
+
+
+/* =================================
+   SKILL TAGS
+================================= */
+
+const skillInput =
+    document.getElementById("jobSkillsInput");
+
+const addSkillButton =
+    document.getElementById("addJobSkillBtn");
+
+const skillsList =
+    document.getElementById("postJobSkillsList");
+
+const hiddenSkillsInput =
+    document.getElementById("jobSkills");
+
+const previewSkills =
+    document.querySelector(
+        ".post-job-preview-skills"
+    );
+
+let jobSkills = [];
+
+
+function updateSkillsUI() {
+
+    if (skillsList) {
+
+        skillsList.innerHTML = "";
+
+        jobSkills.forEach(function (skill, index) {
+
+            const tag =
+                document.createElement("span");
+
+            tag.className =
+                "post-job-skill-tag";
+
+            tag.innerHTML = `
+                ${skill}
+
+                <button
+                    type="button"
+                    data-index="${index}"
+                    aria-label="Remove ${skill}"
+                >
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            `;
+
+            skillsList.appendChild(tag);
+
+        });
+
+    }
+
+    if (hiddenSkillsInput) {
+
+        hiddenSkillsInput.value =
+            jobSkills.join(",");
+
+    }
+
+    if (previewSkills) {
+
+        previewSkills.innerHTML = "";
+
+        if (jobSkills.length === 0) {
+
+            previewSkills.innerHTML = `
+                <span>Skill</span>
+                <span>Skill</span>
+                <span>Skill</span>
+            `;
+
+        } else {
+
+            jobSkills.slice(0, 5).forEach(
+                function (skill) {
+
+                    const previewTag =
+                        document.createElement("span");
+
+                    previewTag.textContent = skill;
+
+                    previewSkills.appendChild(
+                        previewTag
+                    );
+
+                }
+            );
+
+        }
+
+    }
+
+}
+
+
+function addJobSkill() {
+
+    if (!skillInput) return;
+
+    const skill =
+        skillInput.value.trim();
+
+    if (!skill) {
+        return;
+    }
+
+    const alreadyExists =
+        jobSkills.some(function (item) {
+
+            return (
+                item.toLowerCase() ===
+                skill.toLowerCase()
+            );
+
+        });
+
+    if (alreadyExists) {
+
+        skillInput.value = "";
+
+        return;
+    }
+
+    jobSkills.push(skill);
+
+    skillInput.value = "";
+
+    updateSkillsUI();
+
+}
+
+window.addJobSkill = addJobSkill;
+
+if (addSkillButton) {
+
+    addSkillButton.addEventListener(
+        "click",
+        addJobSkill
+    );
+
+}
+
+
+if (skillInput) {
+
+    skillInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                addJobSkill();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (skillsList) {
+
+    skillsList.addEventListener(
+        "click",
+        function (event) {
+
+            const removeButton =
+                event.target.closest("button");
+
+            if (!removeButton) return;
+
+            const index =
+                Number(
+                    removeButton.dataset.index
+                );
+
+            jobSkills.splice(index, 1);
+
+            updateSkillsUI();
+
+        }
+    );
+
+}
+
+
+updateJobPreview();
+updateSkillsUI();
+
+/* =================================
+   SAVE DRAFT + PUBLISH JOB
+================================= */
+
+const postJobForm =
+    document.getElementById("postJobForm");
+
+const saveDraftButton =
+    document.querySelector(".save-job-draft-btn");
+
+const publishButton =
+    document.querySelector(".publish-job-btn");
+
+function showPostJobToast(message, type = "success") {
+
+    let toast =
+        document.querySelector(".post-job-toast");
+
+    if (!toast) {
+
+        toast = document.createElement("div");
+
+        toast.className = "post-job-toast";
+
+        toast.innerHTML = `
+            <i class="bi bi-check-circle-fill"></i>
+            <p></p>
+        `;
+
+        document.body.appendChild(toast);
+
+    }
+
+    const icon = toast.querySelector("i");
+    const text = toast.querySelector("p");
+
+    toast.classList.remove(
+        "error-toast",
+        "success-toast"
+    );
+
+    toast.classList.add(
+        type === "error"
+            ? "error-toast"
+            : "success-toast"
+    );
+
+    if (icon) {
+
+        icon.className =
+            type === "error"
+                ? "bi bi-exclamation-circle-fill"
+                : "bi bi-check-circle-fill";
+
+    }
+
+    if (text) {
+        text.textContent = message;
+    }
+
+    toast.classList.add("show");
+
+    clearTimeout(window.postJobToastTimer);
+
+    window.postJobToastTimer =
+        setTimeout(function () {
+
+            toast.classList.remove("show");
+
+        }, 2500);
+
+}
+
+
+/* SAVE DRAFT */
+
+function collectPostJobData() {
+
+    return {
+
+        title:
+            jobTitleInput?.value || "",
+
+        category:
+            document.getElementById(
+                "jobCategory"
+            )?.value || "",
+
+        type:
+            jobTypeInput?.value || "",
+
+        location:
+            jobLocationInput?.value || "",
+
+        experience:
+            jobExperienceInput?.value || "",
+
+        minimumSalary:
+            minimumSalaryInput?.value || "",
+
+        maximumSalary:
+            maximumSalaryInput?.value || "",
+
+        description:
+            jobDescriptionInput?.value || "",
+
+        requirements:
+            document.getElementById(
+                "jobRequirements"
+            )?.value || "",
+
+        skills: jobSkills ,
+
+        deadline:
+    document.getElementById(
+        "applicationDeadline"
+    )?.value || "",
+
+vacancies:
+    document.getElementById(
+        "numberOfVacancies"
+    )?.value || "",
+
+workMode:
+    document.getElementById(
+        "workMode"
+    )?.value || "",
+
+education:
+    document.getElementById(
+        "educationLevel"
+    )?.value || "",
+
+benefits:
+    Array.from(
+        document.querySelectorAll(
+            'input[name="benefits"]:checked'
+        )
+    ).map(function (checkbox) {
+        return checkbox.value;
+    })
+
+    };
+
+}
+
+
+if (saveDraftButton) {
+
+    saveDraftButton.addEventListener(
+        "click",
+        function () {
+
+            const draftData =
+                collectPostJobData();
+
+            localStorage.setItem(
+                "postJobDraft",
+                JSON.stringify(draftData)
+            );
+
+            showPostJobToast(
+                "Job draft saved successfully."
+            );
+
+        }
+    );
+
+}
+
+
+/* LOAD DRAFT */
+
+const savedDraft =
+    localStorage.getItem("postJobDraft");
+
+if (savedDraft) {
+
+    try {
+
+        const draftData =
+            JSON.parse(savedDraft);
+
+        if (jobTitleInput) {
+            jobTitleInput.value =
+                draftData.title || "";
+        }
+
+        const categoryInput =
+            document.getElementById(
+                "jobCategory"
+            );
+
+        if (categoryInput) {
+            categoryInput.value =
+                draftData.category || "";
+        }
+
+        if (jobTypeInput) {
+            jobTypeInput.value =
+                draftData.type || "Full Time";
+        }
+
+        if (jobLocationInput) {
+            jobLocationInput.value =
+                draftData.location || "";
+        }
+
+        if (jobExperienceInput) {
+            jobExperienceInput.value =
+                draftData.experience || "";
+        }
+
+        if (minimumSalaryInput) {
+            minimumSalaryInput.value =
+                draftData.minimumSalary || "";
+        }
+
+        if (maximumSalaryInput) {
+            maximumSalaryInput.value =
+                draftData.maximumSalary || "";
+        }
+
+        if (jobDescriptionInput) {
+            jobDescriptionInput.value =
+                draftData.description || "";
+        }
+
+        const requirementsInput =
+            document.getElementById(
+                "jobRequirements"
+            );
+
+        if (requirementsInput) {
+            requirementsInput.value =
+                draftData.requirements || "";
+
+                const deadlineInput =
+    document.getElementById(
+        "applicationDeadline"
+    );
+
+if (deadlineInput) {
+    deadlineInput.value =
+        draftData.deadline || "";
+}
+
+const vacanciesInput =
+    document.getElementById(
+        "numberOfVacancies"
+    );
+
+if (vacanciesInput) {
+    vacanciesInput.value =
+        draftData.vacancies || "";
+}
+
+const workModeInput =
+    document.getElementById(
+        "workMode"
+    );
+
+if (workModeInput) {
+    workModeInput.value =
+        draftData.workMode || "On Site";
+}
+
+const educationInput =
+    document.getElementById(
+        "educationLevel"
+    );
+
+if (educationInput) {
+    educationInput.value =
+        draftData.education || "Any Graduate";
+}
+
+if (Array.isArray(draftData.benefits)) {
+
+    document.querySelectorAll(
+        'input[name="benefits"]'
+    ).forEach(function (checkbox) {
+
+        checkbox.checked =
+            draftData.benefits.includes(
+                checkbox.value
+            );
+
+    });
+
+}
+        }
+
+        if (Array.isArray(draftData.skills)) {
+            jobSkills = draftData.skills;
+        }
+
+        updateJobPreview();
+        updateSkillsUI();
+
+        if (
+            jobDescriptionInput &&
+            descriptionCount
+        ) {
+
+            descriptionCount.textContent =
+                `${jobDescriptionInput.value.length} / 1000`;
+
+        }
+
+    } catch (error) {
+
+        localStorage.removeItem(
+            "postJobDraft"
+        );
+
+    }
+
+}
+
+
+/* PUBLISH JOB */
+
+if (postJobForm) {
+
+    postJobForm.addEventListener(
+        "submit",
+        function (event) {
+
+            if (!postJobForm.checkValidity()) {
+
+                event.preventDefault();
+
+                postJobForm.reportValidity();
+
+                showPostJobToast(
+                    "Please complete all required fields.",
+                    "error"
+                );
+
+                return;
+            }
+
+            const minimumSalary =
+                Number(
+                    minimumSalaryInput?.value || 0
+                );
+
+            const maximumSalary =
+                Number(
+                    maximumSalaryInput?.value || 0
+                );
+
+            if (
+                minimumSalary &&
+                maximumSalary &&
+                minimumSalary > maximumSalary
+            ) {
+
+                event.preventDefault();
+
+                showPostJobToast(
+                    "Minimum salary cannot be greater than maximum salary.",
+                    "error"
+                );
+
+                return;
+            }
+
+            if (jobSkills.length === 0) {
+
+                event.preventDefault();
+
+                showPostJobToast(
+                    "Please add at least one required skill.",
+                    "error"
+                );
+
+                return;
+            }
+
+            if (publishButton) {
+
+                publishButton.disabled = true;
+
+                publishButton.innerHTML = `
+                    <span class="spinner-border spinner-border-sm"></span>
+                    Publishing...
+                `;
+
+            }
+
+            localStorage.removeItem(
+                "postJobDraft"
+            );
+
+        }
+    );
+
+}
+</script>
+
+<script>
+(function () {
+    const skillInput = document.getElementById("jobSkillsInput");
+    const oldAddButton = document.getElementById("addJobSkillBtn");
+    const skillsList = document.getElementById("postJobSkillsList");
+    const hiddenSkillsInput = document.getElementById("jobSkills");
+    const previewSkills = document.querySelector(".post-job-preview-skills");
+
+    if (
+        !skillInput ||
+        !oldAddButton ||
+        !skillsList ||
+        !hiddenSkillsInput
+    ) {
+        return;
+    }
+
+    // Purane click events ko hata kar clean button banayega
+    const addButton = oldAddButton.cloneNode(true);
+    oldAddButton.replaceWith(addButton);
+
+    let skills = [];
+
+    function renderSkills() {
+        skillsList.innerHTML = "";
+
+        skills.forEach(function (skill, index) {
+            const tag = document.createElement("span");
+            tag.className = "post-job-skill-tag";
+
+            tag.innerHTML = `
+                ${skill}
+                <button type="button" data-index="${index}">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            `;
+
+            skillsList.appendChild(tag);
+        });
+
+        hiddenSkillsInput.value = skills.join(",");
+
+        if (previewSkills) {
+            previewSkills.innerHTML = "";
+
+            skills.forEach(function (skill) {
+                const previewTag = document.createElement("span");
+                previewTag.textContent = skill;
+                previewSkills.appendChild(previewTag);
+            });
+        }
+    }
+
+    function addSkill() {
+        const skill = skillInput.value.trim();
+
+        if (!skill) {
+            skillInput.focus();
+            return;
+        }
+
+        const alreadyExists = skills.some(function (item) {
+            return item.toLowerCase() === skill.toLowerCase();
+        });
+
+        if (!alreadyExists) {
+            skills.push(skill);
+        }
+
+        skillInput.value = "";
+        renderSkills();
+        skillInput.focus();
+    }
+
+    addButton.addEventListener("click", addSkill);
+
+    skillInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addSkill();
+        }
+    });
+
+    skillsList.addEventListener("click", function (event) {
+        const removeButton = event.target.closest("button");
+
+        if (!removeButton) return;
+
+        const index = Number(removeButton.dataset.index);
+        skills.splice(index, 1);
+        renderSkills();
+    });
+})();
+</script>
+
+</body>
+</html>

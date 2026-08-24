@@ -1,0 +1,415 @@
+{% extends "employer/employer_dash_base.html" %}
+
+{% block title %}
+Employer Dashboard
+{% endblock %}
+
+{% block page_title %}
+Employer Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Welcome -->
+
+    <div class="dashboard-welcome mb-4">
+
+        <h2>
+
+            Welcome,
+            {% if request.user.first_name %}
+                {{ request.user.first_name }}
+            {% else %}
+                {{ request.user.username }}
+            {% endif %}
+
+            👋
+
+        </h2>
+
+        <p>
+
+            Manage your jobs, applications and hiring process from one place.
+
+        </p>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon bg-primary">
+
+                    <i class="bi bi-briefcase-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>{{ total_jobs }}</h3>
+
+                    <p>Total Jobs</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon bg-success">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>{{ active_jobs }}</h3>
+
+                    <p>Active Jobs</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon bg-danger">
+
+                    <i class="bi bi-x-circle-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>{{ closed_jobs }}</h3>
+
+                    <p>Closed Jobs</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon bg-warning">
+
+                    <i class="bi bi-people-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>{{ total_applications }}</h3>
+
+                    <p>Applications</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Actions -->
+
+    <div class="dashboard-section mb-5">
+
+        <div class="section-title">
+
+            <h4>Quick Actions</h4>
+
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+
+                <a href="{% url 'post_job' %}" class="quick-action-card">
+
+                    <i class="bi bi-plus-circle-fill"></i>
+
+                    <h5>Post New Job</h5>
+
+                    <p>Create a new job vacancy.</p>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <a href="{% url 'my_jobs' %}" class="quick-action-card">
+
+                    <i class="bi bi-briefcase-fill"></i>
+
+                    <h5>Manage Jobs</h5>
+
+                    <p>Edit or close existing jobs.</p>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <a href="{% url 'employer_applications' %}" class="quick-action-card">
+
+                    <i class="bi bi-file-earmark-person-fill"></i>
+
+                    <h5>Applications</h5>
+
+                    <p>Review candidate applications.</p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Jobs -->
+
+    <div class="card shadow-sm border-0 mb-5">
+
+        <div class="card-header bg-white">
+
+            <h5 class="mb-0">
+
+                Recent Jobs
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if recent_jobs %}
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Job</th>
+
+                            <th>Location</th>
+
+                            <th>Status</th>
+
+                            <th></th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for job in recent_jobs %}
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+
+                                    {{ job.title }}
+
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                {{ job.location }}
+
+                            </td>
+
+                            <td>
+
+                                {% if job.is_active %}
+
+                                <span class="badge bg-success">
+
+                                    Active
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-danger">
+
+                                    Closed
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{% url 'edit_job' job.id %}"
+                                    class="btn btn-sm btn-primary">
+
+                                    Edit
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="text-muted mb-0">
+
+                No jobs posted yet.
+
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Applications -->
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-white">
+
+            <h5 class="mb-0">
+
+                Latest Applications
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if recent_applications %}
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Candidate</th>
+
+                            <th>Job</th>
+
+                            <th>Status</th>
+
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for application in recent_applications %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ application.full_name }}
+
+                            </td>
+
+                            <td>
+
+                                {{ application.job.title }}
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-info">
+
+                                    {{ application.status|title }}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                {{ application.applied_at|date:"d M Y" }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="text-muted mb-0">
+
+                No applications received.
+
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

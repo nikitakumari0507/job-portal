@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ job.title }} | JobPortal{% endblock %}
+{% block content %}
+<header class="job-detail-hero"><div class="container">
+  <a class="detail-back-link" href="{% url 'browse_jobs' %}"><i class="bi bi-arrow-left"></i> Back to all jobs</a>
+  <div class="detail-hero-content"><div class="professional-logo">{% if job.company_logo %}<img src="{{ job.company_logo.url }}" alt="Company logo">{% else %}<span>{{ job.employer.first_name|default:job.employer.username|slice:":1"|upper }}</span>{% endif %}</div><div><span class="detail-status"><i class="bi bi-patch-check-fill"></i> Actively hiring</span><h1>{{ job.title|title }}</h1><p>{{ job.company_name|default:job.employer.first_name|default:job.employer.username }}</p></div></div>
+</div></header>
+<main class="job-detail-page"><div class="container">
+  {% if messages %}{% for message in messages %}<div class="alert alert-{{ message.tags|default:'info' }}">{{ message }}</div>{% endfor %}{% endif %}
+  <div class="job-detail-layout">
+    <article class="professional-detail-card">
+      <div class="detail-highlights">
+        <div><i class="bi bi-geo-alt"></i><span>Location<strong>{{ job.location }}</strong></span></div>
+        <div><i class="bi bi-briefcase"></i><span>Job type<strong>{{ job.get_job_type_display }}</strong></span></div>
+        <div><i class="bi bi-bar-chart"></i><span>Experience<strong>{{ job.experience|default:"Not specified" }}</strong></span></div>
+        <div><i class="bi bi-currency-rupee"></i><span>Salary<strong>{% if job.minimum_salary and job.maximum_salary %}₹{{ job.minimum_salary }} – ₹{{ job.maximum_salary }}{% else %}Not disclosed{% endif %}</strong></span></div>
+      </div>
+      <section class="detail-section"><h2>About the role</h2><p>{{ job.description|linebreaksbr }}</p></section>
+      <section class="detail-section"><h2>Requirements &amp; responsibilities</h2><p>{{ job.requirements|linebreaksbr }}</p></section>
+      <section class="detail-section"><h2>Skills</h2><div class="detail-skill-list"><span>{{ job.skills|default:"Skills will be discussed during the interview" }}</span></div></section>
+      {% if job.benefits %}<section class="detail-section"><h2>Benefits</h2><p>{{ job.benefits|linebreaksbr }}</p></section>{% endif %}
+    </article>
+    <aside class="professional-apply-card">
+      <h2>Job overview</h2>
+      <div class="overview-row"><i class="bi bi-mortarboard"></i><span>Education<strong>{{ job.education_level|default:"Not specified" }}</strong></span></div>
+      <div class="overview-row"><i class="bi bi-laptop"></i><span>Work mode<strong>{{ job.work_mode|default:"On-site" }}</strong></span></div>
+      <div class="overview-row"><i class="bi bi-people"></i><span>Open positions<strong>{{ job.number_of_vacancies }}</strong></span></div>
+      <div class="overview-row"><i class="bi bi-calendar-check"></i><span>Apply by<strong>{{ job.application_deadline|date:"d M Y"|default:"Open until filled" }}</strong></span></div>
+      {% if already_applied %}<div class="already-applied"><i class="bi bi-check-circle-fill"></i> Application submitted</div>{% elif request.user.is_authenticated and request.user.user_type == "candidate" %}<a class="detail-apply-button" href="{% url 'apply_job' job.id %}"><i class="bi bi-send"></i> Apply Now</a>{% elif not request.user.is_authenticated %}<a class="detail-apply-button" href="{% url 'login' %}?next={% url 'apply_job' job.id %}"><i class="bi bi-box-arrow-in-right"></i> Login to Apply</a>{% else %}<p class="apply-note">Candidate account is required to apply.</p>{% endif %}
+      {% if request.user.user_type == "candidate" %}<a class="detail-save-button" href="{% url 'toggle_saved_job' job.id %}?next={{ request.path }}"><i class="bi {% if is_saved %}bi-bookmark-check-fill{% else %}bi-bookmark{% endif %}"></i>{% if is_saved %} Saved{% else %} Save this job{% endif %}</a>{% endif %}
+      <p class="safe-apply-note"><i class="bi bi-shield-check"></i> Never pay money to apply for a job.</p>
+    </aside>
+  </div>
+  {% if similar_jobs %}<section class="similar-jobs-section">
+    <div class="section-heading"><div><span>MORE OPPORTUNITIES</span><h2>Similar jobs</h2></div><a href="{% url 'browse_jobs' %}">View all jobs <i class="bi bi-arrow-right"></i></a></div>
+    <div class="similar-jobs-grid">{% for similar in similar_jobs %}<article class="professional-similar-card">
+      <div class="similar-card-top"><div class="mini-company-logo">{% if similar.company_logo %}<img src="{{ similar.company_logo.url }}" alt="Company logo">{% else %}<span>{{ similar.employer.first_name|default:similar.employer.username|slice:":1"|upper }}</span>{% endif %}</div><span>{{ similar.get_job_type_display }}</span></div>
+      <h3>{{ similar.title|title }}</h3><p class="similar-company">{{ similar.company_name|default:similar.employer.first_name|default:similar.employer.username }}</p>
+      <div class="similar-meta"><span><i class="bi bi-geo-alt"></i>{{ similar.location }}</span><span><i class="bi bi-bar-chart"></i>{{ similar.experience|default:"Not specified" }}</span></div>
+      <a href="{% url 'job_detail' similar.id %}">View Details <i class="bi bi-arrow-right"></i></a>
+    </article>{% endfor %}</div>
+  </section>{% endif %}
+</div></main>
+{% endblock %}
